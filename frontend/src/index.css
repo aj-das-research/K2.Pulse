@@ -1,0 +1,232 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 228 60% 7%;
+    --foreground: 210 40% 95%;
+
+    --card: 220 40% 6%;
+    --card-foreground: 210 40% 95%;
+
+    --popover: 220 40% 8%;
+    --popover-foreground: 210 40% 95%;
+
+    --primary: 163 100% 42%;
+    --primary-foreground: 228 60% 7%;
+
+    --secondary: 239 84% 67%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 20% 14%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 220 20% 14%;
+    --accent-foreground: 210 40% 95%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 228 60% 7%;
+
+    --success: 160 84% 39%;
+    --success-foreground: 228 60% 7%;
+
+    --border: 220 20% 12%;
+    --input: 220 20% 14%;
+    --ring: 163 100% 42%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 216 28% 7%;
+    --sidebar-foreground: 210 40% 85%;
+    --sidebar-primary: 163 100% 42%;
+    --sidebar-primary-foreground: 228 60% 7%;
+    --sidebar-accent: 220 20% 12%;
+    --sidebar-accent-foreground: 210 40% 95%;
+    --sidebar-border: 220 20% 12%;
+    --sidebar-ring: 163 100% 42%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Glassmorphic card style */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+}
+
+/* Pulsing dot animation */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Logo dot flash: orange → white → orange (one cycle when word changes) */
+@keyframes dot-flash {
+  0%, 100% { color: #ea580c; }
+  50% { color: #f8fafc; }
+}
+
+.logo-dot-flash {
+  animation: dot-flash 0.45s ease-in-out;
+}
+
+/* K2 R logo: R slowly pulses between white and orange */
+@keyframes logo-r-pulse {
+  0%, 100% { color: #f8fafc; }
+  50% { color: #ea580c; }
+}
+
+.logo-r-pulse {
+  animation: logo-r-pulse 5s ease-in-out infinite;
+}
+
+/* Retrieve / Reason / Report: smaller, distinct style, easy on the eyes */
+.logo-word {
+  color: #94a3b8;
+  letter-spacing: 0.03em;
+}
+
+/* Word slides in from the right */
+@keyframes logo-word-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.logo-word-enter {
+  animation: logo-word-in 0.5s ease-out forwards;
+}
+
+/* Word slides left into R and fades */
+@keyframes logo-word-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-1.5em);
+  }
+}
+
+.logo-word-exit {
+  animation: logo-word-out 0.5s ease-in forwards;
+}
+
+/* Pulsing glow for center node */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,212,170,0.3), 0 0 40px rgba(0,212,170,0.1); }
+  50% { box-shadow: 0 0 30px rgba(0,212,170,0.45), 0 0 60px rgba(0,212,170,0.15); }
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+/* Scale-in animation for modals */
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.15s ease-out forwards;
+}
+
+/* Red glow for critical cards */
+.glow-red {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.15), 0 0 40px rgba(239, 68, 68, 0.05);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* Slide-in animation for activity feed */
+@keyframes slide-in-feed {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-in-feed {
+  animation: slide-in-feed 0.35s ease-out both;
+}
+
+/* Card hover scale */
+.glass-card {
+  transition: transform 150ms ease, border-color 150ms ease;
+}
+.glass-card:hover {
+  transform: scale(1.005);
+}
+
+/* Bell shake animation */
+@keyframes bell-shake {
+  0%, 100% { transform: rotate(0deg); }
+  15% { transform: rotate(-5deg); }
+  30% { transform: rotate(5deg); }
+  45% { transform: rotate(-5deg); }
+  60% { transform: rotate(5deg); }
+  75% { transform: rotate(0deg); }
+}
+
+.bell-shake {
+  animation: bell-shake 0.5s ease-in-out;
+}
+
+/* Sidebar sequential animation */
+.sidebar-label {
+  transition: opacity 150ms ease;
+}
+.sidebar-collapsed .sidebar-label {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
